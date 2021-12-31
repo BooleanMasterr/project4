@@ -85,9 +85,6 @@ def register(request):
         return render(request, "network/register.html")
 
 
-# API GOES HERE
-
-
 @csrf_exempt
 @login_required
 def new_post(request):

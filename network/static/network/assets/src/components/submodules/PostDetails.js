@@ -111,11 +111,6 @@ const PostDetails = ({ match }) => {
     }
   }
 
-
-  const goBack = () => {
-    window.history.back();
-  }
-
   useEffect(() => {
     getPost();
   }, []);
@@ -147,10 +142,6 @@ const PostDetails = ({ match }) => {
           </div>
         )
       }   
-
-      <button className="btn btn-outline-secondary" onClick={goBack}>
-        <i className="fa fa-alt-arrow-to-left"></i> Back
-      </button>
       <button className={`${getClass()} ms-2`} onClick={requestLike}>
         <i className="fa fa-heart"></i> {post.is_liked ? "Unlike" : "Like"} : {post.likes_count}
       </button>
