@@ -10,7 +10,8 @@ const EditForm = ({ title, body, handleTitleChange, handleBodyChange }) => {
         onChange={handleTitleChange}
         placeholder='Title'
       />
-      <input 
+      <textarea
+ 
         value={body}
         className="form-control mb-3"
         onChange={handleBodyChange}

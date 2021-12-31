@@ -29,8 +29,9 @@ const Post = ({ post_, getProfile, page, requiresPage, _loadPosts }) => {
     }).then(() => {
       if (requiresPage) {
         obj.fetchPosts(page)
-      } 
-      if (_loadPosts) {
+      }
+      console.log(_loadPosts);
+      if (_loadPosts !== undefined) {
         _loadPosts();
       }
     })
@@ -63,7 +64,12 @@ const Post = ({ post_, getProfile, page, requiresPage, _loadPosts }) => {
           "follow": true,
           "following_username": post_.author 
         })
-      }).then(() => fetchProfile())
+      }).then(() => {
+        fetchProfile();
+        if (_loadPosts !== undefined) {
+          _loadPosts();
+        }
+      })
     }
   }
 
@@ -73,7 +79,7 @@ const Post = ({ post_, getProfile, page, requiresPage, _loadPosts }) => {
         On: {post_['date-created']} By: {post_.author} 
         <br />
         { post_.author !== user.username &&
-          <button className="btn btn-outline-info mt-3 mb-3" onClick={() => {requestFollow(); if (getProfile) {getProfile()}}}>
+          <button className="btn btn-outline-info mt-3 mb-3" onClick={() => {requestFollow(); if (getProfile) {getProfile()} if (_loadPosts) {_loadPosts()}}}>
             {isFollowing(user.id, post_.author) === true? "Unfollow": "Follow"}
           </button>
         }

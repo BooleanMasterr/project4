@@ -7,15 +7,32 @@ const Posts = () => {
   const [posts, setPosts, obj] = useContext(postCtx);
   const [page, setPage] = useState(1);
 
+  // test if storing page number in the localstorage works
+  const loadPageN = () => {
+    if (localStorage.getItem("page") === null) {
+      localStorage.setItem("page", page);
+    } 
+    setPage(localStorage.getItem("page"));
+  }
+
   const getNext = () => {
-    obj.fetchPosts(page+1)
+    obj.fetchPosts(page+1);
+    window.scrollTo(0, 0);
+    loadPageN();
     setPage(prevState => prevState + 1);
   }
 
+
   const getPrev = () => {
-    obj.fetchPosts(page-1)
+    obj.fetchPosts(page-1);
+    window.scrollTo(0, 0);
+    loadPageN();
     setPage(prevState => prevState - 1);
   }
+
+  useEffect(() => {
+    loadPageN();
+  }, [])
 
   return (
     <div>
@@ -24,6 +41,7 @@ const Posts = () => {
           <Post 
             post_={post}
             page={page}
+            requiresPage={true}
           />
         ))
       }

@@ -9,13 +9,14 @@ const Following = () => {
     fetch('/getProfile/')
     .then(response => response.json())
     .then(data => {
-      setFollowing(data.posts_);
+      setFollowing(data.posts);
     });
   }
 
   useEffect(() => {
     loadPosts();
   }, []);
+
 
   return (
     <div>
