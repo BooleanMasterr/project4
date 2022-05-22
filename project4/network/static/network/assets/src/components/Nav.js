@@ -3,10 +3,6 @@ import React from 'react';
 
 const Nav = () => {
 
-  const allPosts = () => {
-    setTimeout(() => window.location.reload(), 0.4);
-  }
-
   return (
     <header class="p-3 text-white dark" id="navBar">
     <div class="container">
@@ -14,7 +10,7 @@ const Nav = () => {
         
         <ul class="nav__links nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><Link to="/new-post" className="nav-link text-white">Add Post</Link></li>
-            <li><Link to="/" className="nav-link text-white" onClick={allPosts}>All Posts</Link></li>
+            <li><Link to="/" className="nav-link text-white">All Posts</Link></li>
             <li><Link to="/profile" className="nav-link text-white">Profile</Link></li>
             <li><Link to="/following" className="nav-link text-white">Following</Link></li>
             <a href="/logout/"><button class="nav-btn">Logout</button></a>
