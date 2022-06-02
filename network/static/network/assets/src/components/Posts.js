@@ -5,20 +5,26 @@ import Post from './submodules/Post';
 const Posts = () => {
 
   const [posts, setPosts, obj] = useContext(postCtx);
-  const [page, setPage] = useState(1);
+  
+  const getPageNumber = () => {
+    return  parseInt(localStorage.getItem('page'))
+  }
+
+  const updatePageNumber = (n) => {
+    localStorage.setItem('page', getPageNumber() + n)
+  }
 
   const getNext = () => {
-    obj.fetchPosts(page+1);
-    window.scrollTo(0, 0);
-    setPage(prevState => prevState + 1);
+    obj.fetchPosts(getPageNumber() + 1)
+    updatePageNumber(1)
   }
-
 
   const getPrev = () => {
-    obj.fetchPosts(page-1);
-    window.scrollTo(0, 0);
-    setPage(prevState => prevState - 1);
+    obj.fetchPosts(getPageNumber() - 1)
+    updatePageNumber(-1)
   }
+
+  
 
   return (
     <div>
@@ -26,7 +32,7 @@ const Posts = () => {
         posts.map(post => (
           <Post 
             post_={post}
-            page={page}
+            page={getPageNumber()}
             requiresPage={true}
           />
         ))
@@ -39,7 +45,7 @@ const Posts = () => {
             </button>
           }
           <p style={ {display: "inline-block"} }>
-            {page}
+            {getPageNumber()}
           </p>
           {
             obj.hasNext &&
